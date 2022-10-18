@@ -39,5 +39,22 @@ module.exports = {
         }
         movies.push(newMovie)
         res.status(200).send(movies)
+    },
+    updateMovie: (req, res) => {
+        let type = req.body.type
+        let id = req.params.id
+        //console.log(type + ' to ' + id)
+        let index = movies.findIndex(element => element.id === +id)
+
+        if (type === 'plus') {
+            movies[index].rating++
+            res.status(200).send(movies)
+        } else if (type === 'minus') {
+            movies[index].rating--
+            res.status(200).send(movies)
+        } else {
+            res.sendStatus(400)
+            //res.status(400).send()
+        }
     }
 }
